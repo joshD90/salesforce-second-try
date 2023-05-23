@@ -1,0 +1,33 @@
+<template>
+  <div class="slds-m-around_medium"></div>
+  <lightning-accordion>
+    <lightning-accordion-section name="housing" label="Housing Section">
+      <p>{recordId}</p>
+    </lightning-accordion-section>
+    <lightning-accordion-section name="drugAndAlcohol" label="Error">
+      <p>{serviceUserDetailsError}</p>
+    </lightning-accordion-section>
+    <lightning-accordion-section name="data" label="Data">
+      <p>{serviceUserDetailsData}</p>
+    </lightning-accordion-section>
+    <lightning-accordion-section
+      name="drugAndAlcohol"
+      label="Drugs and Alcohol"
+    >
+      <p>{serviceUserDetailsError}</p>
+    </lightning-accordion-section>
+    <lightning-accordion-section name="myUser" label="User">
+      <p>Id: {serviceUser.id}</p>
+      <p>DOB: {serviceUser.dob}</p>
+      <p>Name: {serviceUser.fName} {serviceUser.lName}</p>
+    </lightning-accordion-section>
+    <lightning-accordion-section>
+      <div class="container">
+        <c-h-n-a-record></c-h-n-a-record>
+        <c-h-n-a-record></c-h-n-a-record>
+      </div>
+
+      <p>This is working at least</p>
+    </lightning-accordion-section>
+  </lightning-accordion>
+</template>
