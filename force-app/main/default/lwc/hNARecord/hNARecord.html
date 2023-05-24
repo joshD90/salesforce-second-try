@@ -1,7 +1,30 @@
 <template>
-  <lightning-record-form
-    object-api-name={objectApiName}
-    fields={fields}
-  ></lightning-record-form>
-  <p>and this is inside the record form itself</p>
+  <h1>{type}</h1>
+  <template if:false={recordPresent}>
+    <!-- if there is just a form to end  -->
+    <lightning-record-edit-form object-api-name={objectApiName}>
+      <lightning-input-field
+        field-name="Service_User__c"
+        value={accessibleServiceUser.id}
+      ></lightning-input-field>
+      <lightning-input-field
+        field-name="Holistic_Needs_Assessment__c"
+        value={hnaId}
+      ></lightning-input-field>
+      <template for:each={uniqueFields} for:item="field">
+        <lightning-input-field
+          field-name={field.fieldApiName}
+          key={field.fieldApiName}
+        ></lightning-input-field>
+      </template>
+    </lightning-record-edit-form>
+  </template>
+  <!-- if there is already a doc -->
+  <template if:true={recordPresent}>
+    <lightning-record-form
+      object-api-name={objectApiName}
+      fields={fields}
+      onload={handleFormLoad}
+    ></lightning-record-form>
+  </template>
 </template>

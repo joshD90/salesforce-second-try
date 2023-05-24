@@ -7,4 +7,15 @@ public with sharing class Service_User {
       WHERE Id = :id
     ];
   }
+
+  @AuraEnabled(cacheable=true)
+  public static List<Holistic_Needs_Assessment__c> getServiceUsersHNA(
+    string serviceUsersId
+  ) {
+    return [
+      SELECT Id, Name, Service_User__c
+      FROM Holistic_Needs_Assessment__c
+      WHERE Service_User__c = :serviceUsersId
+    ];
+  }
 }

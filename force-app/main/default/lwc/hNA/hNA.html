@@ -1,33 +1,57 @@
 <template>
-  <div class="slds-m-around_medium"></div>
-  <lightning-accordion>
-    <lightning-accordion-section name="housing" label="Housing Section">
-      <p>{recordId}</p>
-    </lightning-accordion-section>
-    <lightning-accordion-section name="drugAndAlcohol" label="Error">
-      <p>{serviceUserDetailsError}</p>
-    </lightning-accordion-section>
-    <lightning-accordion-section name="data" label="Data">
-      <p>{serviceUserDetailsData}</p>
-    </lightning-accordion-section>
-    <lightning-accordion-section
-      name="drugAndAlcohol"
-      label="Drugs and Alcohol"
-    >
-      <p>{serviceUserDetailsError}</p>
-    </lightning-accordion-section>
-    <lightning-accordion-section name="myUser" label="User">
-      <p>Id: {serviceUser.id}</p>
-      <p>DOB: {serviceUser.dob}</p>
-      <p>Name: {serviceUser.fName} {serviceUser.lName}</p>
-    </lightning-accordion-section>
-    <lightning-accordion-section>
-      <div class="container">
-        <c-h-n-a-record></c-h-n-a-record>
-        <c-h-n-a-record></c-h-n-a-record>
-      </div>
-
-      <p>This is working at least</p>
-    </lightning-accordion-section>
-  </lightning-accordion>
+  <template if:true={serviceUser}>
+    <div class="slds-m-around_medium">
+      <!-- we need to create our HNA parent container that holds all the HNA together if it does not already exist -->
+      <template if:false={hnaId}>
+        <lightning-record-edit-form
+          object-api-name="Holistic_Needs_Assessment__c"
+          onsuccess={handleHNASuccess}
+        >
+          <lightning-input-field
+            field-name="Service_User__c"
+            value={serviceUser.id}
+          ></lightning-input-field>
+          <lightning-input-field field-name="Name"></lightning-input-field>
+          <lightning-button
+            type="submit"
+            label="Save"
+            variant="brand"
+          ></lightning-button>
+        </lightning-record-edit-form>
+      </template>
+      <template if:true={hnaId}>
+        <h1>Current HNA that we are working with: {hnaId}</h1>
+      </template>
+    </div>
+    <!-- Actual Accordian -->
+    <template if:true={hnaId}>
+      <!-- Housing -->
+      <lightning-accordion>
+        <lightning-accordion-section name="housing" label="Housing Section">
+          <div class="container">
+            <c-h-n-a-record
+              type="house"
+              onclick={handleClick}
+              service-user={serviceUser}
+              hna-id={hnaId}
+            ></c-h-n-a-record>
+          </div>
+        </lightning-accordion-section>
+        <!-- drug and alcohol -->
+        <lightning-accordion-section
+          name="drugAndAlcohol"
+          label="Drug And Alcohol"
+        >
+          <div class="container">
+            <c-h-n-a-record
+              type="drugAndAlcohol"
+              onclick={handleClick}
+              service-user={serviceUser}
+              hna-id={hnaId}
+            ></c-h-n-a-record>
+          </div>
+        </lightning-accordion-section>
+      </lightning-accordion>
+    </template>
+  </template>
 </template>
