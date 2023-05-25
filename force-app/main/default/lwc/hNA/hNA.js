@@ -13,6 +13,8 @@ export default class MyComponent extends LightningElement {
   serviceUserDetailsError;
   serviceUser;
   hnaId;
+  hnaName;
+  activeSection = [];
 
   @api recordId;
 
@@ -35,6 +37,7 @@ export default class MyComponent extends LightningElement {
       });
 
       this.hnaId = HNA[0].Id;
+      this.hnaName = HNA[0].Name;
     } catch (e) {
       console.log(e, "My Lovely Error");
     }

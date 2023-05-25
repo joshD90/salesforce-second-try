@@ -1,44 +1,23 @@
 import { LightningElement, api } from "lwc";
-//Drug and Alcohol imports
+//apex methods
+import getRecordByHNASection from "@salesforce/apex/HNA.getRecordByHNASection";
+
+//HNA objects
 import HNADrugAndAlcohol from "@salesforce/schema/HNA_Drug_and_Alcohol__c";
-import CURRENT_SUPPORTS_FIELD from "@salesforce/schema/HNA_Drug_and_Alcohol__c.Current_Supports__c";
-import DRUGS_USED_FIELD from "@salesforce/schema/HNA_Drug_and_Alcohol__c.Drugs_Used__c";
-import FREQUENCY_USE_FIELD from "@salesforce/schema/HNA_Drug_and_Alcohol__c.Frequency_Use__c";
-import HOLISTIC_NEEDS_ASSESSMENT_FIELD from "@salesforce/schema/HNA_Drug_and_Alcohol__c.Holistic_Needs_Assessment__c";
-import SERVICE_USER_FIELD from "@salesforce/schema/HNA_Drug_and_Alcohol__c.Service_User__c";
-
-//housing imports
 import HNAHousing from "@salesforce/schema/HNA_Housing__c";
-import HOLISTIC_NEEDS_ASSESSMENT_FIELD_HOUSING from "@salesforce/schema/HNA_Housing__c.Holistic_Needs_Assessment__c";
-import SERVICE_USER_FIELD_HOUSING from "@salesforce/schema/HNA_Housing__c.Service_User__c";
-import NAME_FIELD_HOUSING from "@salesforce/schema/HNA_Housing__c.Name";
+import HNAHealth from "@salesforce/schema/HNA_Health__c";
+import HNAEmotional from "@salesforce/schema/HNA_Emotional__c";
+import HNASocial from "@salesforce/schema/HNA_Social__c";
+import HNAEducation from "@salesforce/schema/HNA_Education__c";
 
-const drugAndAlcoholFields = [
-  CURRENT_SUPPORTS_FIELD,
-  DRUGS_USED_FIELD,
-  FREQUENCY_USE_FIELD,
-  HOLISTIC_NEEDS_ASSESSMENT_FIELD,
-  SERVICE_USER_FIELD
-];
-const uniqueDrugAndAlcoholFields = [
-  CURRENT_SUPPORTS_FIELD,
-  DRUGS_USED_FIELD,
-  FREQUENCY_USE_FIELD
-];
-
-const housingFields = [
-  HOLISTIC_NEEDS_ASSESSMENT_FIELD_HOUSING,
-  SERVICE_USER_FIELD_HOUSING,
-  NAME_FIELD_HOUSING
-];
-const uniqueHousingFields = [NAME_FIELD_HOUSING];
+import { imports } from "./hnaImports";
 
 export default class HNARecord extends LightningElement {
   fields;
   uniqueFields;
   objectApiName;
   myTypeThing;
-  recordPresent = false;
+  recordId;
   accessibleServiceUser;
 
   @api type;
@@ -48,22 +27,80 @@ export default class HNARecord extends LightningElement {
   connectedCallback() {
     this.setFieldsAndApiName();
     this.accessibleServiceUser = JSON.parse(JSON.stringify(this.serviceUser));
+    this.getRecordForSection();
+  }
+
+  handleRecordSave(e) {
+    console.log(e.detail.id, "detail id in handleRecordsave - hna record");
+    this.recordId = e.detail.id;
+  }
+
+  async getRecordForSection() {
+    const result = await getRecordByHNASection({
+      sObjectType: this.objectApiName,
+      hnaId: this.hnaId
+    });
+
+    if (result.length === 0) return;
+    this.recordId = result[0].Id;
   }
 
   setFieldsAndApiName() {
     switch (this.type) {
       case "drugAndAlcohol":
-        this.fields = drugAndAlcoholFields;
+        this.fields = [
+          ...imports.drugAndAlcohol.fields,
+          ...imports.drugAndAlcohol.uniqueFields
+        ];
         this.objectApiName = HNADrugAndAlcohol.objectApiName;
         this.myTypeThing = this.type;
-        this.uniqueFields = uniqueDrugAndAlcoholFields;
+        this.uniqueFields = imports.drugAndAlcohol.uniqueFields;
 
         break;
       case "house":
-        this.fields = housingFields;
+        this.fields = [
+          ...imports.housing.fields,
+          ...imports.housing.uniqueFields
+        ];
         this.objectApiName = HNAHousing.objectApiName;
         this.myTypeThing = this.type;
-        this.uniqueFields = uniqueHousingFields;
+        this.uniqueFields = imports.housing.uniqueFields;
+        break;
+      case "health":
+        this.fields = [
+          ...imports.health.fields,
+          ...imports.health.uniqueFields
+        ];
+        this.objectApiName = HNAHealth.objectApiName;
+        this.myTypeThing = this.type;
+        this.uniqueFields = imports.health.uniqueFields;
+        break;
+      case "emotional":
+        this.fields = [
+          ...imports.emotional.fields,
+          ...imports.emotional.uniqueFields
+        ];
+        this.objectApiName = HNAEmotional.objectApiName;
+        this.myTypeThing = this.type;
+        this.uniqueFields = imports.emotional.uniqueFields;
+        break;
+      case "social":
+        this.fields = [
+          ...imports.social.fields,
+          ...imports.social.uniqueFields
+        ];
+        this.objectApiName = HNASocial.objectApiName;
+        this.myTypeThing = this.type;
+        this.uniqueFields = imports.social.uniqueFields;
+        break;
+      case "education":
+        this.fields = [
+          ...imports.education.fields,
+          ...imports.education.uniqueFields
+        ];
+        this.objectApiName = HNAEducation.objectApiName;
+        this.myTypeThing = this.type;
+        this.uniqueFields = imports.education.uniqueFields;
         break;
       default:
         break;

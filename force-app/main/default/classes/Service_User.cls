@@ -18,4 +18,40 @@ public with sharing class Service_User {
       WHERE Service_User__c = :serviceUsersId
     ];
   }
+
+  @AuraEnabled(cacheable=true)
+  public static List<Risk_Assessment__c> getRiskAssessmentForHNA(
+    string hnaId,
+    string sectionType
+  ) {
+    try {
+      return [
+        SELECT Id
+        FROM Risk_Assessment__c
+        WHERE
+          Holistic_Needs_Assessment__c = :hnaId
+          AND HNA_Type__c = :sectionType
+      ];
+    } catch (Exception e) {
+      throw new AuraHandledException(e.getMessage());
+    }
+  }
+
+  @AuraEnabled(cacheable=true)
+  public static List<Placement_Plan__c> getPlacementPlanForHNA(
+    string hnaId,
+    string sectionType
+  ) {
+    try {
+      return [
+        SELECT Id
+        FROM Placement_Plan__c
+        WHERE
+          Holistic_Needs_Assessment__c = :hnaId
+          AND HNA_Section_Type__c = :sectionType
+      ];
+    } catch (Exception e) {
+      throw new AuraHandledException(e.getMessage());
+    }
+  }
 }

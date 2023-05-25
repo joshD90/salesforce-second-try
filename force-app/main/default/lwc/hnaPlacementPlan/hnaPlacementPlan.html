@@ -1,12 +1,11 @@
 <template>
-  <h1>{type}</h1>
-  <template if:false={recordId}>
-    <!-- if there is just a form to end  -->
-    <lightning-record-edit-form
-      object-api-name={objectApiName}
+  <h1>Plan</h1>
+  <template if:false={recordId}
+    ><lightning-record-edit-form
+      object-api-name="Placement_Plan__c"
       onsuccess={handleRecordSave}
-      onerror={handleRecordError}
     >
+      <!-- prefilled sections -->
       <lightning-input-field
         field-name="Service_User__c"
         value={accessibleServiceUser.id}
@@ -15,7 +14,12 @@
         field-name="Holistic_Needs_Assessment__c"
         value={hnaId}
       ></lightning-input-field>
-      <template for:each={uniqueFields} for:item="field">
+      <lightning-input-field
+        field-name="HNA_Section_Type__c"
+        value={sectionType}
+      ></lightning-input-field>
+      <!-- iterate through remaining unique non prefilled fields -->
+      <template for:each={autoFields} for:item="field">
         <lightning-input-field
           field-name={field.fieldApiName}
           key={field.fieldApiName}
@@ -25,14 +29,12 @@
         type="submit"
         label="Save"
         variant="brand"
-      ></lightning-button>
-    </lightning-record-edit-form>
-  </template>
-  <!-- if there is already a doc -->
+      ></lightning-button></lightning-record-edit-form
+  ></template>
   <template if:true={recordId}>
     <lightning-record-form
-      object-api-name={objectApiName}
-      fields={fields}
+      fields={allFields}
+      object-api-name="Placement_Plan__c"
       record-id={recordId}
     ></lightning-record-form>
   </template>

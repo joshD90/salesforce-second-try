@@ -20,21 +20,40 @@
         </lightning-record-edit-form>
       </template>
       <template if:true={hnaId}>
-        <h1>Current HNA that we are working with: {hnaId}</h1>
+        <h1>Current HNA that we are working with: {hnaId} {hnaName}</h1>
       </template>
     </div>
     <!-- Actual Accordian -->
     <template if:true={hnaId}>
-      <!-- Housing -->
-      <lightning-accordion>
+      <lightning-accordion
+        active-section-name={activeSection}
+        allow-multiple-sections-open
+      >
+        <!-- Housing -->
         <lightning-accordion-section name="housing" label="Housing Section">
           <div class="container">
-            <c-h-n-a-record
-              type="house"
-              onclick={handleClick}
-              service-user={serviceUser}
-              hna-id={hnaId}
-            ></c-h-n-a-record>
+            <div style="width: 33%">
+              <c-h-n-a-record
+                type="house"
+                onclick={handleClick}
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-h-n-a-record>
+            </div>
+            <div style="width: 33%">
+              <c-hna-risk-record
+                type="house"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-risk-record>
+            </div>
+            <div style="width: 33%">
+              <c-hna-placement-plan
+                type="house"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-placement-plan>
+            </div>
           </div>
         </lightning-accordion-section>
         <!-- drug and alcohol -->
@@ -43,14 +62,139 @@
           label="Drug And Alcohol"
         >
           <div class="container">
-            <c-h-n-a-record
-              type="drugAndAlcohol"
-              onclick={handleClick}
-              service-user={serviceUser}
-              hna-id={hnaId}
-            ></c-h-n-a-record>
+            <div style="width: 33%">
+              <c-h-n-a-record
+                type="drugAndAlcohol"
+                onclick={handleClick}
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-h-n-a-record>
+            </div>
+            <div style="width: 33%">
+              <c-hna-risk-record
+                type="drugAndAlcohol"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-risk-record>
+            </div>
+            <div style="width: 33%; padding: 1rem">
+              <c-hna-placement-plan
+                type="drugAndAlcohol"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-placement-plan>
+            </div>
           </div>
         </lightning-accordion-section>
+        <!-- Health -->
+        <lightning-accordion-section name="health" label="Health Section">
+          <div class="container">
+            <div style="width: 33%">
+              <c-h-n-a-record
+                type="health"
+                onclick={handleClick}
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-h-n-a-record>
+            </div>
+            <div style="width: 33%">
+              <c-hna-risk-record
+                type="health"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-risk-record>
+            </div>
+            <div style="width: 33%">
+              <c-hna-placement-plan
+                type="health"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-placement-plan>
+            </div>
+          </div>
+        </lightning-accordion-section>
+        <!-- emotional -->
+        <lightning-accordion-section name="emotional" label="Emotional Section">
+          <div class="container">
+            <div style="width: 33%">
+              <c-h-n-a-record
+                type="emotional"
+                onclick={handleClick}
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-h-n-a-record>
+            </div>
+            <div style="width: 33%">
+              <c-hna-risk-record
+                type="emotional"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-risk-record>
+            </div>
+            <div style="width: 33%">
+              <c-hna-placement-plan
+                type="emotional"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-placement-plan>
+            </div>
+          </div>
+        </lightning-accordion-section>
+        <!-- social -->
+        <lightning-accordion-section name="social" label="Social Section">
+          <div class="container">
+            <div style="width: 33%">
+              <c-h-n-a-record
+                type="social"
+                onclick={handleClick}
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-h-n-a-record>
+            </div>
+            <div style="width: 33%">
+              <c-hna-risk-record
+                type="social"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-risk-record>
+            </div>
+            <div style="width: 33%">
+              <c-hna-placement-plan
+                type="social"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-placement-plan>
+            </div>
+          </div>
+        </lightning-accordion-section>
+        <!-- Education -->
+        <lightning-accordion-section name="education" label="Education Section">
+          <div class="container">
+            <div style="width: 33%">
+              <c-h-n-a-record
+                type="education"
+                onclick={handleClick}
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-h-n-a-record>
+            </div>
+            <div style="width: 33%">
+              <c-hna-risk-record
+                type="education"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-risk-record>
+            </div>
+            <div style="width: 33%">
+              <c-hna-placement-plan
+                type="education"
+                service-user={serviceUser}
+                hna-id={hnaId}
+              ></c-hna-placement-plan>
+            </div>
+          </div>
+        </lightning-accordion-section>
+        <!-- end -->
       </lightning-accordion>
     </template>
   </template>
