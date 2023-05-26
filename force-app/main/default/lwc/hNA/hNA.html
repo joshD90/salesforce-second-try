@@ -41,11 +41,16 @@
               ></c-h-n-a-record>
             </div>
             <div style="width: 33%">
-              <c-hna-risk-record
+              <!-- <c-hna-risk-record
                 type="house"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-risk-record>
+              ></c-hna-risk-record> -->
+              <c-h-n-a-risk-section
+                hna-id={hnaId}
+                current-section-type="housing"
+                service-user={serviceUser}
+              ></c-h-n-a-risk-section>
             </div>
             <div style="width: 33%">
               <c-hna-placement-plan

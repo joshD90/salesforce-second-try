@@ -63,7 +63,6 @@ export default class HnaRiskRecord extends LightningElement {
         sectionType: this.sectionType
       });
       if (result[0]) this.recordId = result[0].Id;
-      console.log(this.recordId, "record Id");
     } catch (error) {
       console.log(error, "error");
     }

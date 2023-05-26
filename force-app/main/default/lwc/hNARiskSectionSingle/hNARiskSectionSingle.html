@@ -1,0 +1,20 @@
+<template>
+  <!-- Heading -->
+  <lightning-modal-header onclick={toggleBody}
+    ><div class="header">
+      <h1>{record.Id}</h1>
+      <span>{record.Cause_for_Concern__c}</span>
+    </div></lightning-modal-header
+  >
+  <!-- Body -->
+  <template if:true={bodyToggled}>
+    <lightning-modal-body
+      ><lightning-record-form
+        record-id={record.Id}
+        fields={allFields}
+        object-api-name="Risk_Assessment__c"
+        mode="readonly"
+      ></lightning-record-form
+    ></lightning-modal-body>
+  </template>
+</template>

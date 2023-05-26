@@ -1,0 +1,5 @@
+1 - Able to have multiple Risks and Plans association with one section
+2 - We want a snapshot list of all risks and plans in their respective column summarising - these risks and plans can be clicked into as a seperate file - also have the option of dropping down risk and viewing within the section without navigation
+3 - We want to be able to create a new risk at the bottom of this section
+
+
