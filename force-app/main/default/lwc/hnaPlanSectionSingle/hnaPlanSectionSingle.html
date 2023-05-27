@@ -2,7 +2,7 @@
   <!-- Heading -->
   <lightning-modal-header onclick={toggleBody}
     ><div class="header">
-      <span>{record.Cause_for_Concern__c}</span>
+      <span>{record.Plan_Detail__c}</span>
       <!-- <h1 onclick={goToRecord}>{record.Id}</h1> -->
       <div class="icon-div">
         <lightning-icon
@@ -20,7 +20,7 @@
       ><lightning-record-form
         record-id={record.Id}
         fields={allFields}
-        object-api-name="Risk_Assessment__c"
+        object-api-name="Placement_Plan__c"
         mode="readonly"
       ></lightning-record-form
     ></lightning-modal-body>

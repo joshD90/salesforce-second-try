@@ -15,13 +15,13 @@ export default class HNA_Risk_Section_Single extends NavigationMixin(
   }
 
   goToRecord() {
-    console.log(this.record.Id);
+    console.log("ABOUT TO NAVIGATE");
     this[NavigationMixin.Navigate]({
       type: "standard__recordPage",
       attributes: {
-        objectApiName: "Risk_Assessment__c",
+        objectApiName: "Placement_Plan__c",
         actionName: "view",
-        recordId: this.record?.Id
+        recordId: this.record.Id
       }
     });
   }

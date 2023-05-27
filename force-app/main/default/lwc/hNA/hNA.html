@@ -53,11 +53,16 @@
               ></c-h-n-a-risk-section>
             </div>
             <div style="width: 33%">
-              <c-hna-placement-plan
+              <!-- <c-hna-placement-plan
                 type="house"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-placement-plan>
+              ></c-hna-placement-plan> -->
+              <c-hna-plan-section
+                hna-id={hnaId}
+                service-user={serviceUser}
+                current-section-type="housing"
+              ></c-hna-plan-section>
             </div>
           </div>
         </lightning-accordion-section>
@@ -76,18 +81,28 @@
               ></c-h-n-a-record>
             </div>
             <div style="width: 33%">
-              <c-hna-risk-record
+              <!-- <c-hna-risk-record
                 type="drugAndAlcohol"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-risk-record>
+              ></c-hna-risk-record> -->
+              <c-h-n-a-risk-section
+                hna-id={hnaId}
+                current-section-type="housing"
+                service-user={serviceUser}
+              ></c-h-n-a-risk-section>
             </div>
             <div style="width: 33%; padding: 1rem">
-              <c-hna-placement-plan
+              <!-- <c-hna-placement-plan
                 type="drugAndAlcohol"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-placement-plan>
+              ></c-hna-placement-plan> -->
+              <c-hna-plan-section
+                hna-id={hnaId}
+                service-user={serviceUser}
+                current-section-type="drugAndAlcohol"
+              ></c-hna-plan-section>
             </div>
           </div>
         </lightning-accordion-section>
@@ -103,18 +118,28 @@
               ></c-h-n-a-record>
             </div>
             <div style="width: 33%">
-              <c-hna-risk-record
+              <!-- <c-hna-risk-record
                 type="health"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-risk-record>
+              ></c-hna-risk-record> -->
+              <c-h-n-a-risk-section
+                hna-id={hnaId}
+                current-section-type="health"
+                service-user={serviceUser}
+              ></c-h-n-a-risk-section>
             </div>
             <div style="width: 33%">
-              <c-hna-placement-plan
+              <!-- <c-hna-placement-plan
                 type="health"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-placement-plan>
+              ></c-hna-placement-plan> -->
+              <c-hna-plan-section
+                hna-id={hnaId}
+                service-user={serviceUser}
+                current-section-type="health"
+              ></c-hna-plan-section>
             </div>
           </div>
         </lightning-accordion-section>
@@ -130,18 +155,28 @@
               ></c-h-n-a-record>
             </div>
             <div style="width: 33%">
-              <c-hna-risk-record
+              <!-- <c-hna-risk-record
                 type="emotional"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-risk-record>
+              ></c-hna-risk-record> -->
+              <c-h-n-a-risk-section
+                hna-id={hnaId}
+                current-section-type="housing"
+                service-user={serviceUser}
+              ></c-h-n-a-risk-section>
             </div>
             <div style="width: 33%">
-              <c-hna-placement-plan
+              <!-- <c-hna-placement-plan
                 type="emotional"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-placement-plan>
+              ></c-hna-placement-plan> -->
+              <c-hna-plan-section
+                hna-id={hnaId}
+                service-user={serviceUser}
+                current-section-type="emotional"
+              ></c-hna-plan-section>
             </div>
           </div>
         </lightning-accordion-section>
@@ -157,18 +192,28 @@
               ></c-h-n-a-record>
             </div>
             <div style="width: 33%">
-              <c-hna-risk-record
+              <!-- <c-hna-risk-record
                 type="social"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-risk-record>
+              ></c-hna-risk-record> -->
+              <c-h-n-a-risk-section
+                hna-id={hnaId}
+                current-section-type="social"
+                service-user={serviceUser}
+              ></c-h-n-a-risk-section>
             </div>
             <div style="width: 33%">
-              <c-hna-placement-plan
+              <!-- <c-hna-placement-plan
                 type="social"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-placement-plan>
+              ></c-hna-placement-plan> -->
+              <c-hna-plan-section
+                hna-id={hnaId}
+                service-user={serviceUser}
+                current-section-type="social"
+              ></c-hna-plan-section>
             </div>
           </div>
         </lightning-accordion-section>
@@ -184,18 +229,28 @@
               ></c-h-n-a-record>
             </div>
             <div style="width: 33%">
-              <c-hna-risk-record
+              <!-- <c-hna-risk-record
                 type="education"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-risk-record>
+              ></c-hna-risk-record> -->
+              <c-h-n-a-risk-section
+                hna-id={hnaId}
+                current-section-type="education"
+                service-user={serviceUser}
+              ></c-h-n-a-risk-section>
             </div>
             <div style="width: 33%">
-              <c-hna-placement-plan
+              <!-- <c-hna-placement-plan
                 type="education"
                 service-user={serviceUser}
                 hna-id={hnaId}
-              ></c-hna-placement-plan>
+              ></c-hna-placement-plan> -->
+              <c-hna-plan-section
+                hna-id={hnaId}
+                service-user={serviceUser}
+                current-section-type="education"
+              ></c-hna-plan-section>
             </div>
           </div>
         </lightning-accordion-section>

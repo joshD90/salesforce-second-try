@@ -1,0 +1,66 @@
+<template>
+  <h1 class="top">Placement Plans</h1>
+  <!-- Records that Already Exist -->
+  <template for:each={records} for:item="record">
+    <c-hna-plan-section-single
+      record={record}
+      all-fields={allPlanFields}
+      hna-id={hnaId}
+      key={record.Id}
+    ></c-hna-plan-section-single>
+  </template>
+  <!-- Create New Section -->
+  <!-- Button -->
+  <template if:false={creatingOpen}>
+    <div class="createNewButton">
+      <lightning-button
+        variant="success"
+        label="Create a New Placement Plan"
+        onclick={toggleCreatingForm}
+      ></lightning-button>
+    </div>
+  </template>
+
+  <!-- Form -->
+  <template if:true={creatingOpen}>
+    <lightning-record-edit-form
+      object-api-name="Placement_Plan__c"
+      onsuccess={handlePlanSaved}
+    >
+      <!-- prefilled sections -->
+      <lightning-input-field
+        field-name="Service_User__c"
+        value={serviceUser.id}
+      ></lightning-input-field>
+      <lightning-input-field
+        field-name="Holistic_Needs_Assessment__c"
+        value={hnaId}
+      ></lightning-input-field>
+      <lightning-input-field
+        field-name="HNA_Section_Type__c"
+        value={sectionType}
+      ></lightning-input-field>
+      <!-- iterate through remaining unique non prefilled fields -->
+      <template for:each={iterableFields} for:item="field">
+        <lightning-input-field
+          field-name={field.fieldApiName}
+          key={field.fieldApiName}
+        ></lightning-input-field>
+      </template>
+      <lightning-button
+        type="submit"
+        label="Save"
+        variant="brand"
+      ></lightning-button>
+    </lightning-record-edit-form>
+    <template if:true={creatingOpen}>
+      <div class="createNewButton">
+        <lightning-button
+          variant="destructive-text"
+          label="Close Form"
+          onclick={toggleCreatingForm}
+        ></lightning-button>
+      </div>
+    </template>
+  </template>
+</template>

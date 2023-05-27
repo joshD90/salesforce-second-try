@@ -1,18 +1,15 @@
 import { LightningElement, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
-import getRiskAssessmentRecords from "@salesforce/apex/HNA.getRiskAssessmentRecords";
-import getRiskSingleRecord from "@salesforce/apex/HNA.getRiskSingleRecord";
+import getPlanRecords from "@salesforce/apex/HNA.getPlanRecords";
+import getPlanSingleRecord from "@salesforce/apex/HNA.getPlanSingleRecord";
 
-import { riskImports } from "./hnaRiskImports";
+import { imports } from "./hnaPlanImports";
 
 export default class HNA_Risk_Section extends LightningElement {
   records;
-  allRiskFields = [
-    ...riskImports.iterableFields,
-    ...riskImports.prefilledFields
-  ];
-  iterableFields = riskImports.iterableFields;
+  allPlanFields = [...imports.iterableFields, ...imports.prefilledFields];
+  iterableFields = imports.iterableFields;
   creatingOpen = false;
   sectionType;
 
@@ -21,7 +18,7 @@ export default class HNA_Risk_Section extends LightningElement {
   @api currentSectionType;
 
   connectedCallback() {
-    this.sectionType = riskImports.typeOfSection[this.currentSectionType].title;
+    this.sectionType = imports.typeOfSection[this.currentSectionType].title;
     this.getRecordsId();
   }
 
@@ -30,8 +27,7 @@ export default class HNA_Risk_Section extends LightningElement {
     this.creatingOpen = this.creatingOpen ? false : true;
   }
 
-  handleRiskSaved(event) {
-    this.updateRecordsList(event.detail.id);
+  handlePlanSaved(event) {
     this.toggleCreatingForm();
     const toastEvent = new ShowToastEvent({
       title: "Success",
@@ -40,12 +36,13 @@ export default class HNA_Risk_Section extends LightningElement {
     });
     this.dispatchEvent(toastEvent);
     this.scrollToTop();
+    //there is an issue with this as it does not seem to be working with the most recent data  - could do a seperate api call with just the id and push this onto the end of our records array
+    this.updateRecordsList(event.detail.id);
   }
 
   scrollToTop() {
-    console.log("SCROLLING");
     const element = this.template.querySelector(".top");
-    console.log(element, "element");
+
     if (element) {
       element.scrollIntoView({
         behavior: "smooth"
@@ -55,11 +52,10 @@ export default class HNA_Risk_Section extends LightningElement {
 
   async getRecordsId() {
     try {
-      const result = await getRiskAssessmentRecords({
+      const result = await getPlanRecords({
         hnaId: this.hnaId,
         sectionType: this.sectionType
       });
-
       this.records = result;
     } catch (error) {
       console.log(error, "error");
@@ -68,7 +64,7 @@ export default class HNA_Risk_Section extends LightningElement {
 
   async updateRecordsList(recordId) {
     try {
-      const result = await getRiskSingleRecord({ recordId: recordId });
+      const result = await getPlanSingleRecord({ recordId: recordId });
       console.log(result, "raw result");
       this.records = JSON.parse(JSON.stringify([...this.records, ...result]));
       console.log(this.records, "after refresh");

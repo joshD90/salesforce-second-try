@@ -1,0 +1,7 @@
+.createNewButton {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 1rem;
+}
